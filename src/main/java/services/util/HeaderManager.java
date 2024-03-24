@@ -32,6 +32,18 @@ public class HeaderManager {
             builderMap.put("Content-Type",contentType);
             return this;
         }
+        public Builder withAccept(String contentType)
+        {
+            builderMap.put("Accept",contentType);
+            return this;
+        }
+
+        public Builder withSecurityToken(String token)
+        {
+            builderMap.put("securityToken",token);
+            return this;
+        }
+
     }
 
 }

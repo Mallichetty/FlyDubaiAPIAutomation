@@ -5,6 +5,11 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FlightAvailabilityHelper
 {
     public String generateAvailabilityFlightRequest()
@@ -35,5 +40,20 @@ public class FlightAvailabilityHelper
         paxArray.put("childCount",0);
         reqBody.put("paxInfo",paxArray);
         return reqBody.toJSONString();
+    }
+
+    public String token(String responseHeaders) {
+
+        String pattern = "\\b([^\\s]+)=([^\\s]+)\\b";
+        Map<String, String> map = new HashMap<>();
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher (responseHeaders);
+        while (m.find())
+        {
+            System.out.println("Found a key/value: (" + m.group(1) + "," + m.group(2) + ")"); map.put(m.group (1), m.group(2));
+        }
+        String token = map.get("securityToken");
+        String newToken=token.substring(1,token.length());
+        return newToken;
     }
 }

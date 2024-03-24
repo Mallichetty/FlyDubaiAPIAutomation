@@ -37,7 +37,7 @@ public class FlightAvailabilityController extends FlightAvailabilityHelper {
             testContext.getScenarioContext().setContext(Context.AVAILABILITY_REQUEST_BODY,reqBody);
             response = restAPIClient.invokeAPI(AppEndPoints.HOST_NAME + AppEndPoints.AVAILABILITY_ENDPOINT,
                     headerManager.getHeader(), "POST", reqBody);
-            Assert.assertEquals(response.get("responseCode"), "200");
+            Assert.assertEquals( "200",response.get("responseCode"));
         } catch (Exception e) {
             Log.warn(e.getMessage());
         }
