@@ -2,6 +2,8 @@ package services.helper;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import services.context.Context;
 import services.context.TestContext;
 
@@ -15,17 +17,16 @@ public class PrepareFlightHelper
     TestContext testContext;
 
 
-    public String getPrepareFlightRequestBody(String searchRequest, String selectFlights)
-    {
+    public String getPrepareFlightRequestBody(String searchRequest, String selectFlights) throws ParseException {
         JSONObject reqBody = new JSONObject();
         JSONObject pref = new JSONObject();
         JSONArray array = new JSONArray();
-        reqBody.put("currency","AED");
-        reqBody.put("itineraryAction",1);
-        reqBody.put("searchRequest",searchRequest);
-        reqBody.put("selectedFlights",selectFlights);
+        JSONParser parser= new JSONParser();
+        reqBody.put("currency","");
+        reqBody.put("searchRequest",parser.parse(searchRequest));
+        reqBody.put("selectedFlights",parser.parse(selectFlights));
         reqBody.put("passengerList",array);
-        pref.put("isReadyToSignUpForOffers",false);
+        pref.put("isReadyToSignUpForOffers","true");
         reqBody.put("preferences",pref);
         return reqBody.toJSONString();
     }

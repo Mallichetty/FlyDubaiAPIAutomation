@@ -32,9 +32,9 @@ public class HeaderManager {
             builderMap.put("Content-Type",contentType);
             return this;
         }
-        public Builder withAccept(String contentType)
+        public Builder withAppId(String contentType)
         {
-            builderMap.put("Accept",contentType);
+            builderMap.put("appId",contentType);
             return this;
         }
 
